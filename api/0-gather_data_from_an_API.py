@@ -26,7 +26,7 @@ def get_api():
                 tasks_done += 1
             tasks_total += 1
 
-    print('Employee {} is done with tasks({}/{})'.format(emp_name,
+    print('Employee {} is done with tasks({}/{}):'.format(emp_name,
                                                           tasks_done,
                                                           tasks_total))
     for title in tasks_titles:
