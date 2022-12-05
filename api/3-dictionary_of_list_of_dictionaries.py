@@ -14,8 +14,8 @@ def get_api():
         for emp in usrs:
             task_list = []
             uid = emp.get('id')
-            todo = r.get(url + 'todos',
-                         params={'userId': uid}).json()
+            # todo = r.get(url + 'todos', params={'userId': uid}).json()
+            todo = r.get(url + 'users/{}/todos'.format(uid)).json()
             for task in todo:
                 tmp_obj = {
                     'username': emp.get('username'),
