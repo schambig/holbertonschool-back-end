@@ -6,26 +6,17 @@ import requests as r  # give an alias to the module
 
 def get_api():
     ''' Gather data from an API '''
-    url = 'https://jsonplaceholder.typicode.com/'
-    usrs = r.get(url + 'users').json()
+    url = "https://jsonplaceholder.typicode.com/"
+    user = r.get(url + "users").json()
 
-    with open('to_all_employees.json', 'w') as file:
-        obj = {}
-        for emp in usrs:
-            task_list = []
-            uid = emp.get('id')
-            # todo = r.get(url + 'todos', params={'userId': uid}).json()
-            todo = r.get(url + 'users/{}/todos'.format(uid)).json()
-            for task in todo:
-                tmp_obj = {
-                    'username': emp.get('username'),
-                    'task': task.get('title'),
-                    'completed': task.get('completed')
-                    }
-                task_list.append(tmp_obj)
-            obj[uid] = task_list
-        # serialize an onject into a JSON stream
-        json.dump(obj, file, indent=4)
+    with open("todo_all_employees.json", "w") as jsonfile:
+        json.dump({usr.get("id"): [{
+            "username": usr.get("username"),
+            "task": e.get("title"),
+            "completed": e.get("completed")
+        } for e in r.get(url + "todos",
+                         params={"userId": usr.get("id")}).json()]
+            for usr in user}, jsonfile)
 
 
 if __name__ == '__main__':
