@@ -25,7 +25,7 @@ def get_api():
                 task_list.append(tmp_obj)
             obj[uid] = task_list
         # serialize an onject into a JSON stream
-        json.dump(obj, file)
+        json.dump(obj, file, indent=4)
 
 
 if __name__ == '__main__':
